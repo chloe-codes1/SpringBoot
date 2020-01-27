@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<meta charset="UTF-8">
+<title>Test2</title>
+</head>
+<body>
+
+	<!-- p30 -->
+
+	<h1>Thymeleaf tutorial - Solution for exercise 14: same-template
+		fragments</h1>
+	<div th:fragment="banner" id="bannerElement">
+		<div class="banner">
+			<img src="/cat/png" th:src="@{/cat.png}" alt="고양이 사진이 나올 자리" /> <br/>
+			<span>고양이</span>
+		</div>
+	</div>
+	<h2>Product information</h2>
+	<dl>
+		<dt>Product name</dt>
+		<dd th:text="${product.description}">Red chair</dd>
+		<dt>Product price</dt>
+		<dd th:text="${product.price}">350</dd>
+		<dt>Product available from</dt>
+		<dd th:text="${product.availableFrom}">28-Jun-2013</dd>
+	</dl>
+	<div th:include="this :: banner">Banner</div>
+	<h2>Customer information</h2>
+	<dl>
+		<dt>ID</dt>
+		<dd th:text="${customer.id}"/>
+
+		<dt>PW</dt>
+		<dd th:text="${customer.pw}"/>
+		
+		<dt>NAME</dt>
+		<dd th:text="${customer.name}"/>
+		
+	</dl>
+	<div th:include="this :: [//div[@id='bannerElement']]">Banner</div>
+
+
+	<!-- 주석 Test p38 -->
+	
+	<!-- HTML Comment -->
+	
+
+
+	<!-- Enum p51 -->
+
+	<p> Gender Result : <span th:text="${result}"> </span> </p>
+	<p> Gender Name : <span th:text="${name}"></span></p>
+	<p> Gender description : <span th:text="${description}"></span></p>	
+	<p> Gender ordinal : <span th:text="${ordinal}"></span></p>
+
+
+
+	<!-- https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#difference-between-thinclude-and-threplace -->
+	<!-- 8. Template Layout Sample -->
+
+	<h2>Template Layout Sample</h2>
+	
+	<div th:fragment="copy">
+	 &copy; Template Layout Test
+	</div>
+
+	<div th:include="test2 :: copy"></div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+</head>
+<body>
+
+당신은 Test Page로 왔다 <br>
+
+html은 eltag 사용 못한다 => ${msg}
+
+<!-- eltag 사용을 원하면 th:text= "" 사용 해야함! -->
+<h2 th:text= "${msg}"></h2>
+
+
+</body>
+</html>

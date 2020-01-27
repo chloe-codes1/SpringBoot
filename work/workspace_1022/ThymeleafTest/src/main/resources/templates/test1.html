@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<title>Test 1</title>
+
+<meta charset="utf-8" />
+</head>
+<body>
+	<h1>Thymeleaf tutorial - exercise : bean values</h1>
+
+
+	<h2>
+		Dear <span>[[${customerName}]]</span> <br/>
+		
+		<!-- p37 -->
+		<span th:text="|Hello ${customerName}!|"></span> 
+		
+	</h2>
+
+
+
+
+
+	<h2>Product information</h2>
+	<dl>
+		<dt>Product name</dt>
+		<dd th:text="${product.description}">Red chair</dd>
+		<dt>Product price</dt>
+		<dd th:text="${#numbers.formatDecimal(product.price, 1, 2)}">350</dd>
+		<dt>Product price => #numbers.formatDecimal(num,3,2,'COMMA')</dt>
+		<dd th:text="${#numbers.formatDecimal(product.price,3,2,'COMMA')}">350</dd>
+
+		<dt>Product available from</dt>
+		<dd th:text="${#dates.format(product.availableFrom, 'MM-dd-yyyy')}">28-Jun-2013</dd>
+	</dl>
+	<dl>
+		<dt>Product name</dt>
+		<dd th:text="${product.description}">Red chair</dd>
+		<dt>Product price</dt>
+		<dd th:text="${product.price}">350</dd>
+		<dt>Product available from</dt>
+		<dd th:text="${product.availableFrom}">28-Jun-2013</dd>
+
+	</dl>
+
+	<div th:text="${html}">Escaped Text</div>
+	<!-- 결과 => <h2> Product Information</h2> -->
+	<div th:utext="${html}">Unescaped Text</div>
+	<!-- 결과 => (h2)크기의 Product Information -->
+
+
+
+	<!-- th:each test -->
+	<dl>
+		<dt>Product List</dt>
+		<dd th:each="product : ${customerList}">
+		
+	<!-- 
+		[ Stat ] 
+		: 반복문의 상태를 알 수 있는 status 변수
+		  -> th:each에서 status 변수가 명시되지 않으면 타임리프는 
+		         요소가 할당되는 변수의 이름 뒤에 'Stat'을 붙여서 자동으로 정의
+	-->
+		<p th:text="${productStat.count}"/>
+		<p th:text="${product.description}"/>
+		<p th:text="${'$' + #numbers.formatDecimal(product.price, 1,2)}"/>
+		<p th:text="${#dates.format(product.availableFrom, 'MM-dd-yyyy')}"/>
+		
+		
+		</dd>
+	</dl>
+	<!-- switch case sample -->
+
+	<h2>Switch Case Test - cat vs chubby</h2>
+	<dl>
+		<dd th:switch="${product.description}">
+			<img th:case="'cat'" th:src="@{/cat.png}" alt="cat" /> <img
+				th:case="'chubby'" th:src="@{/chubbyCat.jpg}" alt="chubbyCat" />
+		</dd>
+	</dl>
+
+
+	<h2> </h2>
+	<p class="label">Four multiplied by minus six multiplied by minus
+		two module seven:</p>
+	<p class="answer" th:text="${4 * -6 * -2 % 7}">123</p>
+	<h2>Object navigation</h2>
+	<p class="label">Description field of paymentMethod field of the
+		third element of customerList bean:</p>
+	<p class="answer" th:text="${customerList[1].availableFrom.day}">Credit
+		card</p>
+	<h2>Object instantiation</h2>
+	<p class="label">Current time milliseconds:</p>
+	<p class="answer" th:text="${new java.util.Date().getTime()}">22-Jun-2013</p>
+	<h2>T operator</h2>
+	<p class="label">Random number:</p>
+	<p class="answer" th:text="${T(java.lang.Math).random()}">123456</p>
+
+
+</body>
+</html>

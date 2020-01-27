@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	총 게시글 - [[${boardlist.size()}]]
+	<button onclick="location.href = 'Uploadgallery'">글작성</button>
+
+	<table border="2">
+		<tr>
+			<th:block th:if="${iter.index % 4 == 0}"
+				th:each="data,iter : ${boardlist}">
+				<td><a th:href="@{detail(BoardNo=${data.BoardNo})}"> <img
+						width="300" height="250" th:src="@{${data.Imagesrc}}">
+						<div>
+							<h3>aa1 - [[${iter.index}]]</h3>
+							<h3>제목 - [[${data.BoardTitle}]]</h3>
+						</div>
+				</a></td>
+		</tr>
+		</th:block>
+		<tr>
+			<th:block th:if="${iter.index % 4 == 1}"
+				th:each="data,iter : ${boardlist}">
+				<td><a th:href="@{detail(BoardNo=${data.BoardNo})}"> <img
+						width="300" height="250" th:src="@{${data.Imagesrc}}">
+						<div>
+							<h3>aa2 - [[${iter.index}]]</h3>
+							<h3>제목 - [[${data.BoardTitle}]]</h3>
+						</div>
+				</a></td>
+		</tr>
+		</th:block>
+
+		<tr>
+			<th:block th:if="${iter.index % 4 == 2}"
+				th:each="data,iter : ${boardlist}">
+				<td><a th:href="@{detail(BoardNo=${data.BoardNo})}"> <img
+						width="300" height="250" th:src="@{${data.Imagesrc}}">
+						<div>
+							<h3>aa2 - [[${iter.index}]]</h3>
+							<h3>제목 - [[${data.BoardTitle}]]</h3>
+						</div>
+				</a></td>
+		</tr>
+		</th:block>
+
+		<tr>
+			<th:block th:if="${iter.index % 4 == 3}"
+				th:each="data,iter : ${boardlist}">
+				<td><a th:href="@{detail(BoardNo=${data.BoardNo})}"> <img
+						width="300" height="250" th:src="@{${data.Imagesrc}}">
+						<div>
+
+							<h3>aa2 - [[${iter.index}]]</h3>
+							<h3>제목 - [[${data.BoardTitle}]]</h3>
+						</div>
+				</a></td>
+		</tr>
+		</th:block>
+
+		</th:block>
+	</table>
+</body>
+
+
+</html>

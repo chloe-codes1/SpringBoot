@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>boardList.html</title>
+</head>
+<body>
+
+<div class="container">
+	<h3><a th:href="boardList" th:text="QnA">QnA</a></h3>
+	<br>
+	<form action="search">
+		<select id="searchType" name="searchType">
+    		<option value="boardtitle">boardtitle</option>
+    		<option value="userid">userid</option>
+		</select>
+		<input type="text" id="keyword" name="keyword" placeholder="검색" required="required"/>
+		<input type="submit" value="검색" class="btn btn-default">
+	</form>
+	<br>
+	<button th:type="button" th:onclick="location.href='main'" class="btn btn-default">메인으로</button>
+	<button th:type="button" th:onclick="location.href='insertForm'" class="btn btn-default">질문등록</button><br><br>
+	<h5> 총 게시글 [[${num}]] 건</h5>
+
+	<table class="table">
+	<tr> 
+		<th>글번호</th> 
+		<th>제목</th> 
+		<th>작성자</th> 
+		<th>작성날짜</th>
+		<th>조회수</th>
+	</tr>
+	
+	<tr th:each="board : ${boardList}">
+		<td th:text="${board.boardno}">
+		<td>
+		<th:block th:if="${board.grouplayer}>1">
+			<th:block th:each="num: ${#numbers.sequence(1,board.grouplayer)}">
+        		&nbsp;
+    		</th:block>
+			<th:block th:each="num: ${#numbers.sequence(2,board.grouplayer)}">
+        		↪
+    		</th:block>
+		</th:block>
+		<a th:href="'getBoard?boardno='+${board.boardno}" th:text="${board.boardtitle}"></a></td>
+		<td th:text="${board.userid}">
+		<td th:text="${#dates.format(board.regdate, 'yyyy-MM-dd HH:mm')}">
+		<td th:text="${board.countp}">
+	</tr>
+	
+	<tr>
+		<td colspan="5">
+		<th:block th:if="${page.isPrev() == true}">
+			<a style="text-decoration:none;" th:href="@{boardList1(pagenum=${page.getStartPage()-1})}">
+			◀
+			</a>
+		</th:block>
+		<th:block th:each="i : ${#numbers.sequence(page.getStartPage(),page.getEndPage())}">
+			<a style="text-decoration: none;" th:href="@{boardList1(pagenum=${i})}" th:text="${i}"></a>
+		</th:block>		
+			
+		<th:block th:if="${page.isNext() == true}">
+			<a style="text-decoration:none;" th:href="@{boardList1(pagenum=${page.getEndPage()+1})}">
+			▶
+			</a>
+		</th:block>
+		</td>
+	</tr>
+	</table>
+
+	<br>
+	<button th:type="button" th:onclick="location.href='insertForm'" class="btn btn-default">질문등록</button><br><br>
+	
+</div>
+
+
+</body>
+</html>

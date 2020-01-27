@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;3조최종/src/main/resources/sql/3조 테이블생성.txt&apos; to &apos;schema.txt&apos;" description="Rename resource &apos;3조 테이블생성.txt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/sql/3조 테이블생성.txt" name="schema.txt" stamp="1572852694176" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;3조최종/src/main/resources/sql/schema.txt&apos; to &apos;schema.sql&apos;" description="Rename resource &apos;schema.txt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/sql/schema.txt" name="schema.sql" stamp="1572852748293" updateReferences="true"/>
+</session>

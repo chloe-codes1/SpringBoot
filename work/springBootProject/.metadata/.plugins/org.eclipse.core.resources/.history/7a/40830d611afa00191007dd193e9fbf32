@@ -1,0 +1,283 @@
+package com.example.demo;
+
+import java.io.File;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.bean.FileVO;
+import com.example.demo.bean.HealthBoard;
+import com.example.demo.bean.PageMaker;
+import com.example.demo.bean.PagingCriteria;
+import com.example.demo.service.BoardMapper;
+
+@Controller
+public class BoardController {
+	
+	@Autowired
+	private BoardMapper boardMapper;
+	
+	// paging 용
+
+	/*
+	private static final int BUTTONS_TO_SHOW = 3;
+    private static final int INITIAL_PAGE = 0;
+    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int[] PAGE_SIZES = { 5, 10};
+	*/
+	
+	
+	// paging ver 1)
+	@GetMapping("boardList")
+	public void boardList(@ModelAttribute("healthBoard") HealthBoard healthBoard, 
+			              PagingCriteria cri,  Model model) {
+	
+		 
+		 List<HealthBoard> list = boardMapper.getBoardList2(cri); 
+		 int total = boardMapper.totalCnt();
+		
+		 model.addAttribute("boardList", boardMapper.getBoardList());
+		 model.addAttribute("paging", new PageMaker(cri, total));
+		 
+		 model.addAttribute("boardList", list);
+		 
+		 
+	}
+	
+	// paging 없는 그냥 list 출력
+	@GetMapping("boardList_backup2")
+	public void boardList_backup2(@ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+		model.addAttribute("boardList", boardMapper.getBoardList());
+	}
+	
+	
+	
+	
+	
+	// paging ver 2)
+	  // [ 성현오빠 방법 paging ]
+	@GetMapping("boardList_paging")
+	public void boardList_paging(@ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+	
+	
+  
+		int line_num = 10;
+		
+		int list_all = boardMapper.totalCnt();
+		int list_num;
+		if(list_all % line_num == 0) {
+			
+			list_num = (int)Math.ceil(list_all/line_num);
+		}else {
+			list_num = (int)Math.ceil(list_all/line_num) + 1;
+		}
+		
+		model.addAttribute("list_num", list_num);
+		model.addAttribute("boardList", boardMapper.getBoardList());
+	}
+	
+	@RequestMapping("moveboard")
+	public String moveboard(HttpServletRequest request, Model model) {
+		
+		String condition = request.getParameter("condition");
+		String keyword = request.getParameter("keyword");
+		
+		int line_num = 10;
+		int board_num = Integer.parseInt(request.getParameter("board_num"));
+		
+		List<HealthBoard> list = null;
+		int list_all = 0;
+		
+		if(condition.equals("")) {
+			
+			list = boardMapper.moveList(board_num);
+			list_all = boardMapper.totalCnt();
+		} else {
+			list = boardMapper.moveSearchList(board_num, condition, keyword);
+			request.setAttribute("condition", condition);
+			request.setAttribute("keyword", keyword);
+		}
+		model.addAttribute("boardList",list);
+		int list_num;
+		if(list_all % line_num == 0) {
+			list_num = (int)Math.ceil(list_all / line_num);
+		}else {
+			list_num = (int)Math.ceil(list_all / line_num) +1 ;
+			
+		}
+		model.addAttribute("list_num", list_num);
+		
+		return "redirect:/boardList_paging";
+	}
+	
+	
+	
+	
+	@GetMapping("boardData/{postNo}")
+	public String boardData(HttpServletRequest request ,@PathVariable("postNo") int postNo, @ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+		if(boardMapper.fileView(postNo) !=null) {
+		
+		model.addAttribute("postNo", postNo);
+		model.addAttribute("boardData", boardMapper.boardView(postNo));
+//		model.addAttribute("fileData", boardMapper.fileView(postNo).getFileUrl() + boardMapper.fileView(postNo).getFileName());
+
+		System.out.println(request.getServletContext().getRealPath(boardMapper.fileView(postNo).getFileUrl()) + boardMapper.fileView(postNo).getFileName());
+		
+		model.addAttribute("fileData", boardMapper.fileView(postNo).getFileUrl() + boardMapper.fileView(postNo).getFileName());
+		
+		} else {
+			model.addAttribute("postNo", postNo);
+			model.addAttribute("boardData", boardMapper.boardView(postNo));
+		}
+		
+		return "boardData";
+	}
+	
+	@GetMapping("search")
+	public String search(@ModelAttribute("healthBoard") HealthBoard healthBoard, 
+					@RequestParam(value = "condition", required = true) String condition, 
+			           @RequestParam(value="keyword", required = true) String keyword, Model model){
+		
+		List<HealthBoard> list = boardMapper.searchView(condition, keyword);
+		
+		
+		System.out.println(condition);
+		System.out.println(keyword);
+		
+		System.out.println(list);
+		
+		model.addAttribute("boardList", list);
+		
+		return "boardList_backup2";
+	}
+	
+	
+	
+	@GetMapping("boardInsert")
+	public void boardInsert(@ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+	}
+	
+	
+	@PostMapping("insert")
+	public String insert(HttpServletRequest request, @RequestPart MultipartFile files) throws Exception{
+		
+		FileVO file = new FileVO();
+		HealthBoard board = new HealthBoard();
+		
+		long size = files.getSize();
+		System.out.println("file size => "+ size);
+		
+		board.setWriter(request.getParameter("writer"));
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		
+		if(files.isEmpty()) boardMapper.insertBoard(board);
+		
+		
+		String fileName = files.getOriginalFilename();
+		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+		File destinationFile;
+		String destinationFileName;
+		String fileUrl = "/uploadFiles/";
+				
+		do {
+			destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
+			destinationFile = new File(request.getServletContext().getRealPath(fileUrl) + destinationFileName);
+			
+			System.out.println(destinationFile);
+			
+		} while (destinationFile.exists());
+		
+		destinationFile.getParentFile().mkdirs();
+		files.transferTo(destinationFile);
+		
+				
+		boardMapper.insertBoard(board);
+		
+		
+		file.setPostNo(board.getPostNo());
+		file.setFileName(destinationFileName);
+		file.setFileOriName(fileName);
+		file.setFileUrl(fileUrl);
+	
+		boardMapper.insertFile(file);
+		
+		
+		return "redirect:boardList_backup2";
+	}
+	
+	
+	// 글 delete
+	
+	@GetMapping("delete/{postNo}")
+	public String delete(@PathVariable("postNo") int postNo, @ModelAttribute("healthBoard") HealthBoard healthBoard) {
+		
+		
+		boardMapper.deleteBoard(postNo);
+		
+		
+		return "redirect:/boardList_backup2";
+	}
+	
+	
+	// boardUpdate 창 이동
+	@GetMapping("boardUpdate/{postNo}")
+	public String boardUpdate(@PathVariable("postNo") int postNo, @ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+		model.addAttribute("boardData", boardMapper.boardView(postNo));
+		
+		return "boardUpdate";
+	}
+	
+	// 글 Update
+	@GetMapping("update/{postNo}")
+	public String update(@PathVariable("postNo")int postNo, @ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+		boardMapper.updateBoard(healthBoard);
+		model.addAttribute("boardData", boardMapper.boardView(postNo));
+		
+		
+		return "redirect:/boardData/{postNo}";
+	}
+	
+	// 답글 쓰기 창 이동
+	@GetMapping("reply/{groupNo}")
+	public String reply(@PathVariable("groupNo") int groupNo, @ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+		model.addAttribute("groupNo", groupNo);
+		
+		
+		return "replyInsert";
+	}
+	
+	
+	//답글 insert
+	@GetMapping("reply/replyInsert")
+	public String replyInsert(@ModelAttribute("healthBoard") HealthBoard healthBoard, Model model) {
+		
+		boardMapper.replyUpdate(healthBoard);
+		boardMapper.insertReply(healthBoard);
+		
+		return "redirect:/boardList_backup2";
+	}
+	
+	
+	
+}

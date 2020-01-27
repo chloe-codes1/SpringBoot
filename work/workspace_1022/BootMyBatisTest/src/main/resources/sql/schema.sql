@@ -1,0 +1,5 @@
+CREATE TABLE member
+(
+no number PRIMARY KEY NOT NULL,
+name VARCHAR2(10) NOT NULL
+);

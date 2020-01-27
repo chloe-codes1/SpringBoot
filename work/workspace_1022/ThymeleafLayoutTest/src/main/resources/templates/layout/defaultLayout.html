@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<!-- layout 쓰기위한 xml name space 설정 -->
+
+<head>
+<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">Default Layout Title</title>
+<!-- 공통으로 사용할 CSS, JavaScript, Img, ...etc. -->
+<th:block th:replace="fragments/commonHead"></th:block>
+		<!-- th:replace는 전체를 가져오므로 
+			 commonHead.html에는 전체 형식이 아니라 meta만 오면 됨! 
+			  => meta를 데려오므로 여기 page의 meta는 지워줘야함-->
+
+		<!-- th:block은 공통적이지 않은 것을 가져올 때 사용! -->
+
+</head>
+<body>
+
+	<h1>Basic Layout</h1>
+	<!-- Page의 Body 부분 (Content 부분) -->
+	<th:block th:replace="fragments/body :: body"></th:block>
+
+	<!-- 공통 footer -->
+	<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+					<!-- fragments/commonFooter에 있는 이름이 commonFooter인 애를 가져와라! -->
+					<!-- :: 는 ~에 속해있는 이라는 뜻 -->
+	
+<!-- 	<th:block th:include="fragments/commonFooter"></th:block>
+ -->	
+			<!-- => include로 부르면 fragments/commonFooter 안에 있는 모든 애들을 불러옴! -->
+	
+	
+	
+	<!-- 공통 JavaScript -->
+	<!-- <th:block th:replace="fragments/commonScript"></th:block> -->
+
+	<!-- 현재 page에서 사용할 JavaScript -->
+	<th:block layout:fragment="pageScript"></th:block>
+		<!-- => 매번 바뀌는 부분은 layout:fragment 사용 -->
+
+
+</body>
+</html>
+
+
+
+

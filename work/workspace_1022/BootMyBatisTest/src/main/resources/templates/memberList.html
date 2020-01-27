@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+</head>
+<body>
+	<div id="main">
+
+		<div id="list">
+			<p id="title">Member List1 - member.xml 사용</p>
+
+			<div th:each="data : ${memberList}">
+				<div id="list_data">
+					<div>Number - <span th:text="${data.no}"></span></div>
+					<div>Name - [[${data.name}]]</div>
+				</div>
+			</div>
+		</div>
+		<div id="list2">
+			<p id="title2">Member List2 - Annotation 사용</p>
+
+			<div th:each="data2 : ${memberList2}">
+				<div id="list_data2">
+					<div>Number - <span th:text="${data2.no}"></span></div>
+					<div>Name - [[${data2.name}]]</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

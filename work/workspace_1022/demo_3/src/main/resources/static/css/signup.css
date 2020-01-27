@@ -1,0 +1,231 @@
+@charset "UTF-8";
+/* 영문용폰트 font-family: 'Oxygen', sans-serif; */
+@import url('https://fonts.googleapis.com/css?family=Oxygen&display=swap');
+
+/* 한글용 폰트 font-family: 'Noto Serif KR', serif;*/
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap');
+
+#users {
+	text-align: right;
+	padding: 10px;
+	margin: 0;
+}
+
+#users span {
+	padding: 0 5px;
+}
+
+.reg {
+	letter-spacing: 1px;
+	text-decoration: none;
+	color: #000;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: 'Oxygen', sans-serif;
+}
+
+#logo {
+	margin: 0;
+	padding: 0;
+	align-content: center;
+	text-align: center;
+}
+
+body {
+	margin: 0 auto;
+	font-family: 'Oxygen', sans-serif;
+}
+
+#dropdown ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	float: right;
+	position: relative;
+	left: -50%;
+	z-index: 200;
+}
+
+#dropdown ul li{
+	color: rgb(070, 093, 114);
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float: left;
+	margin: 0px;
+	padding: 0px 20px;
+	position: relative;
+	left: 50%;
+}
+
+#dropdown > ul > li > a {
+	font-size: 1.3em;
+	font-weight: bold;
+	
+}
+
+#dropdown ul li a {
+	color: rgb(055, 078, 99);
+	text-decoration: none;
+	display: block;
+}
+
+#dropdown ul li a:hover {
+	color: #000;
+}
+
+#dropdown ul ul {
+	display: none;
+}
+
+#dropdown ul li:hover > ul {
+	display: block;
+}
+
+#dropdown ul li:hover > ul li {
+	background-color: rgb(252, 252, 252);
+	font-weight: bold;
+}
+
+.newul li {
+	padding: 20px;
+	display: block;
+}
+
+.menu{
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+hr {
+	size: 1px;
+	color: black;
+}
+
+
+
+/* 여기서부터 Sign Up을 위한 CSS */
+
+#title {
+	text-align: center;
+	font-family: 'Oxygen', sans-serif;
+	font-size: 2em;
+	font-weight: bold;
+	color: rgb(035, 058, 79);
+	letter-spacing: 2px;
+	margin: 10px 10px 0 10px;
+}
+
+#subtitle {
+	text-align: center;
+	font-family: 'Noto Serif KR', serif;
+	font-size: 1em;
+	font-weight: bold;
+	color: rgb(035, 058, 79);
+	letter-spacing: 2px;
+	margin: 10px 10px 0 10px;	
+}
+
+.table {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.tr1 {
+	border: 2px solid rgb(035, 058, 79);
+	height: 55px;
+	margin: 5px 5px 20px 0;
+}
+
+.legend {
+	font-family: 'Noto Serif KR', serif;
+	font-size: 1.0em;
+	font-weight: bold;
+}
+
+.idoutline {
+	margin: 5px 0 0 0;	
+}
+
+.error {
+	margin: 5px 0 0 0;
+	color: red;
+	font-family: 'Noto Serif KR', serif;
+	font-size: 0.8em;
+}
+
+.realinput{
+	position: relative;
+	top: 12px;
+	left: 5px;
+	width: 90%;
+	border: none;
+	line-height: 30px;
+	font-family: 'Noto Serif KR', serif;
+	font-size: 1em;
+}
+
+.role {
+	border: 2px solid rgb(035, 058, 79);
+	height: 55px;
+	line-height: 55px;
+	margin: 5px 5px 20px 0;
+	font-family: 'Oxygen', sans-serif;
+	font-weight: bold;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+.lcbtns {
+	background-color: rgb(035, 058, 79);
+	width: 99%;
+	height: 50px;
+	border: none;
+	color: white;
+	margin: 5px 0;
+	text-align: center;
+	font-size: 1.2em;
+	letter-spacing: 2px;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+
+.lcbtns:hover {
+	background-color: rgb(090, 113, 132);
+	color: white;
+}
+
+/* 여기까지 Sign Up을 위한 CSS */
+
+
+
+.logobox {
+	border: 1px solid #000;
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 15px;
+	margin: 40;
+}
+
+
+.info {
+	text-align: center;
+}
+
+.footer{
+	text-align: center;
+	background: rgb(035, 058, 79);
+	color: #fff;
+	font-size: 11px;
+	width: 100%;
+	padding: 13px;
+	margin: 0 0 0 0;
+	display: block;
+}
+
+.background {
+	width: 80%;
+	height: 350px;
+}

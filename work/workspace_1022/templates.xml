@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="html_all" deleted="false" description="" enabled="true" name="myTemplate">&lt;!DOCTYPE html&gt;&#13;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;&#13;
+&lt;head&gt;&#13;
+&lt;meta charset="UTF-8"&gt;&#13;
+&lt;title&gt;Test&lt;/title&gt;&#13;
+&lt;/head&gt;&#13;
+&lt;body&gt;&#13;
+&#13;
+&#13;
+&#13;
+&lt;/body&gt;&#13;
+&lt;/html&gt;</template></templates>

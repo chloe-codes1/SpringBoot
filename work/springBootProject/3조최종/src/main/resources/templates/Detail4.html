@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+
+   <div th:each="data : ${boarddetail}">
+      <div id="list_data">
+         <table border="2" width="400">
+            <tr>
+               <td>제목</td>
+               <td>[[${data.BoardTitle}]]</td>
+            </tr>
+            <tr>
+               <td>작성자</td>
+               <td>[[${data.UserId}]]</td>
+            </tr>
+            <tr>
+               <td>작성일</td>
+               <td>[[${data.Regdate}]]</td>
+            </tr>
+            <tr>
+               <td>내용</td>
+               <td th:utext="${data.Contentp}">내용없음</td>
+            </tr>
+            <tr>
+               <td>조회수</td> 
+               <td>[[${data.Countp}]]</td>
+            </tr>
+         </table>
+         <img width="400" height="250" th:src="@{${data.Imagesrc}}">
+         <div>
+            <div>
+               <a
+                  th:href="@{delete(BoardNo=${data.BoardNo},BoardPw=${data.BoardPw})}">삭제</a>
+               <a
+                  th:href="@{update4(BoardNo=${data.BoardNo},BoardPw=${data.BoardPw})}">수정</a>
+               <a th:href="@{list4}">목록보기</a>
+            </div>
+         </div>
+      </div>
+   </div>
+
+</body>
+</html>

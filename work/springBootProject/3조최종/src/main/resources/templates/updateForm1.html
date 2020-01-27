@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>updateForm.html</title>
+</head>
+<body>
+	<div class="container">
+	<br><input type="button" value="뒤로가기" onclick="history.back(-1);" class="btn btn-default"><br>
+	<h3>수정 하기</h3>
+	<form th:action="@{updateBoard}" method="post">
+		<div class="form-group">
+			<input type="hidden" id="userid" name="userid" th:value="${board.userid}">
+			<input type="hidden" id="boardno" name="boardno" th:value="${board.boardno}">
+			<input type="text" class="form-control" id="boardtitle" name="boardtitle" placeholder="boardtitle" th:value="${board.boardtitle}" required="required" autofocus="autofocus"/><br><br>
+			<input type="password" class="form-control" id="boardpw" name="boardpw" placeholder="boardpw" th:value="${board.boardpw}" /><br><br>
+			<textarea id="contentp" class="form-control" name="contentp" placeholder="contentp" th:value="${board.contentp}" required="required" rows="20" wrap="hard">
+			[[${board.contentp}]]
+			</textarea><br><br>
+		</div>
+		
+		<input type="submit" value="수정하기" class="btn btn-default">
+	</form>
+	</div>
+</body>
+</html>

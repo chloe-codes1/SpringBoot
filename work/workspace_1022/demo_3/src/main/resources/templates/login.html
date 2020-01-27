@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/main.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>login</title>
+</head>
+<body>
+	<h3>Log-in</h3>
+
+	<form role="form" th:object="${userVo}" th:action="@{/loginResult}" action="#"
+		method="post">
+		<input type="text" th:value="${id}" th:field="*{id}" name="id" id="id" autofocus="autofocus" placeholder="id" required="required">
+		<input type="text" th:value="${pw}" name="pw" id="pw" autofocus="autofocus" placeholder="password" required="required">
+		<input type="submit" th:value="로그인">
+		<input type="reset" th:value="취소">
+	</form>
+	<a th:href="index">홈으로</a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:href="@{login}">
+id : <input type="text" name=id> <br>
+pw : <input type="text" name=pw> <br>
+<input type="submit">
+</form>
+
+<h1 th:text="${login}"></h1>
+
+<a th:href="@{list}">명단 보기</a>
+</body>
+</html>

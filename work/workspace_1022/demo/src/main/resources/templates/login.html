@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+
+</head>
+<body>
+
+<div id="title">
+	<p id="title_text"> Log-In</p>
+</div>
+
+<div id="main">
+<form role="form" action="#" th:object="${usersvo}" th:action="@{/loginResult}" method="post">
+
+ID : <input type="text" th:value="${id}" th:field="*{id}" name="id" id="id" placeholder="id" required="required" /> <br/>
+PW : <input type="text" th:value="${pw}" name="pw" id="pw" placeholder="pw" required="required" /> <br/>
+
+<input type="submit" th:value="Log-In">
+<input type="reset" th:value="Reset"> 
+
+
+</form>
+
+</div>
+
+
+
+</body>
+</html>

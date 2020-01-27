@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- 내가 body 라는걸 선언해줘야함! -->
+<body th:fragment="body">
+	
+	<p>Body !!!!!!</p>
+	
+	<!-- commonFooter를 가져와라 -->
+	<th:block th:include="fragments/commonFooter"></th:block>
+		<!-- => 근데이거 defaultLayout에 이미 해놔서 사실 안해도 됨! 그냥 예시임~~ -->
+		<!-- => include로 부르면 fragments/commonFooter 안에 있는 모든 애들을 불러옴! -->
+	<th:block layout:fragment="js/board/my.js"></th:block>
+
+</body>
+</html>

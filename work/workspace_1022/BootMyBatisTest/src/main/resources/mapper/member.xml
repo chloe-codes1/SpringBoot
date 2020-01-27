@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTDMapper3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.service.MemberMapper">
+	<select id="getMemberList" resultType="Member">
+	
+		select no, name from member
+	
+	</select>
+
+	<insert id="insertMember" parameterType="com.example.demo.bean.Member">
+	
+		INSERT INTO member(no, name) VALUES(#{no}, #{name})
+	
+	</insert>
+
+</mapper>

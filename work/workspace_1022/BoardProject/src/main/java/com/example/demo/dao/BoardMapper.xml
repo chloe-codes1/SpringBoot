@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTDMapper3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.BoardMapper">
+	<insert id="addBoard" parameterType="Board">
+		insert into board
+		(BOARD_NUM, BOARD_userid, BOARD_TITLE,
+		BOARD_CONTENT,
+		BOARD_IMG,board_parent
+		)
+		values(${board_num},
+		'${board_userid}',
+		'${board_title}',
+		'${board_content}',
+		'${board_img}',
+		${board_parent}
+
+		)
+	</insert>
+
+	<insert id="addBoard2" parameterType="Board">
+		insert into board
+		(BOARD_NUM, BOARD_ID, BOARD_TITLE,
+		BOARD_CONTENT, BOARD_IMG
+		,
+		board_groupnum, board_groupord)
+		values(${seq},
+		'${id}',
+		'${title}',
+		'${content}',
+		'${file}',
+		${board_groupnum},
+		${board.groupord},
+		${board.grouplayer}
+		)
+	</insert>
+
+	<select id="getSeq" resultType="int">
+		select nvl(max(board_num), 0)
+		from board
+	</select>
+
+	<select id="boardList" resultType="Board">
+	
+		SELECT LPAD(' re:',
+		4*(LEVEL-1)) || board_title board_title,
+
+		board_num,
+		board_userid,
+		board_cnt,
+		board_date
+
+		FROM board
+
+		START WITH board_parent = 0
+
+		CONNECT BY PRIOR board_num = board_parent
+ 		ORDER SIBLINGS BY board_date desc
+	</select>
+
+	<select id="boardView" parameterType="int" resultType="Board">
+		select * from board where board_num = ${board_num}
+	
+	</select>
+
+</mapper>

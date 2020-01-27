@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>등록</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+<a href="board">홈</a>
+<a href="main">main</a>
+	<h3>자료실게시판</h3>
+	<form action="searchboard" method="get">
+	     			<input type="submit" value="🔍" style="float: right;"> <input
+				type="text" name="search" id="search" style="float: right"
+				placeholder="제목을 입력하세요."> </form>
+	<table class="table table-striped">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>내용</th>
+			<th>첨부파일</th>
+			<th>작성일</th>
+			<th>조회수</th>
+		</tr>
+		<tr th:each="board : ${list}">
+
+			<td th:text="${board.boardno}"></td>
+			<td><a th:href="'detailboard?boardno='+${board.boardno}" th:text="${board.boardtitle}"></a></td>
+			<td th:text="${board.contentp}"></td>
+	        <td><th:block th:if="${board.filesrc} != null "> 💾 </th:block>  
+			<td th:text="${#dates.format(board.regdate, 'yyyy-MM-dd HH:mm')}"></td>
+			<td th:text="${board.countp}"></td>
+	 	
+
+		</tr>
+	</table>
+	<button class="" onclick="location.href='insert'" style="float: right";>등록</button>
+	</div>
+</body>
+</html>

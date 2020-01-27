@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+</head>
+<body>
+
+<div id="title"> 
+<p id="title_text">Member Insert Form </p>
+
+</div>
+
+<div id="main">
+
+<form role="form" th:object="${member}" th:action="Insert">
+
+Number : <input type="text" class="inputs" id="no" name="no" th:field="*{no}" 
+          placeholder="Member Number." required="required" /> <br/>
+Name : <input type="text" class="inputs" id="name" name="name" th:field="*{name}" 
+          placeholder="Member's Name." required="required" /> <br/>
+		<input type="submit" class="btns" id="submit" value="Submit">
+		<input type="reset" class="btns" id="reset" value="Reset">
+
+</form>
+
+</div>
+
+
+
+</body>
+</html>

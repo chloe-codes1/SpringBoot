@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+<title>게시물상세보기</title>
+
+<body>
+	<div class="container">
+		<a href="board">홈</a>
+
+		<h3>게시물 상세보기</h3>
+
+		<table class="table">
+
+			<tr>
+				<td>이름</td>
+				<td th:text="${detail.userid}"></td>
+			</tr>
+			<tr>
+				<td>번호</td>
+				<td th:text="${detail.boardno}"></td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td th:text="${detail.boardtitle}"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td th:text="${detail.boardpw}"></td>
+			</tr>
+			<tr>
+				<td>첨부파일</td>
+				<td><th:block th:if="${detail.filesrc} != null "> 💾 </th:block>
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><pre th:text="${detail.contentp}"></pre></td>
+			</tr>
+			<tr>
+				<td>날짜</td>
+				<td th:text="${#dates.format(detail.regdate, 'yyyy-MM-dd HH:mm')}"></td>
+			</tr>
+			<tr>
+				<td>조회수</td>
+				<td th:text="${detail.countp}"></td>
+			</tr>
+
+		</table>
+
+		<a href="insert">등록</a> <a
+			th:href="'deleteboard?boardno='+${detail.boardno}" th:text="삭제"></a>
+		<a th:href="'update?boardno='+${detail.boardno}" th:text="수정"></a>
+		<!-- 	<a th:href="'updateboard2?boardno='+${detail.boardno}" th:text="수정"></a> -->
+	</div>
+</body>
+
+</html>

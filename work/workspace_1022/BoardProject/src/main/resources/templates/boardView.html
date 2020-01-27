@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table width="700" border="3" bordercolor="lightgray" align="center">
+        <tr>
+            <td id="title">작성자</td>
+            <td>세션로그인정보</td>
+        </tr>
+            <tr>
+            <td id="title">
+                제 목
+            </td>
+            <td th:text="${board.board_title}">
+                
+            </td>        
+        </tr>
+        <tr>
+            <td id="title">
+                내 용
+            </td>
+            <td th:text="${board.board_content}">
+                        
+            </td>        
+        </tr>
+        <tr>
+            <td id="title">
+          	조회수
+            </td>
+            <td th:text="${board.board_cnt}">
+            </td>    
+        </tr>
+        <tr>
+            <td id="title">
+          	등록일
+            </td>
+            <td th:text="${board.board_date}">
+            </td>    
+        </tr>
+        <tr>
+            <td id="title">
+          	이미지
+            </td>
+            <td>
+            <img th:src="${board.board_img}">
+            </td>    
+        </tr>
+ 
+        <tr align="center" valign="middle">
+            <td colspan="5">
+            </td>
+        </tr>
+    </table>    
+	
+
+
+</body>
+</html>

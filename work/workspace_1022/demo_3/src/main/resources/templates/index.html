@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/main.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>index</title>
+</head>
+<body>
+	<h3>Hello Spring Boot</h3>
+
+	${msg} ==> html이니까 controller에서 값을 안가져온다.
+	<h2 th:text="${msg}"></h2> 
+	<a th:href="@{/test}">click</a>
+	<a th:href="@{/login}">로그인창</a>
+	<a th:href="@{/board}">게시판창</a>
+</body>
+</html>

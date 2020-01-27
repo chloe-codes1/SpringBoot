@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+	<table style="text-align:center">
+		<tr>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>날짜</td>
+			<td>조회수</td>
+		</tr>
+		<tr th:each="board : ${boardList}">
+			<td th:text="${board.board_num}"></td>
+			<td><pre><a th:href="@{/../boardView/}+${board.board_num}" th:utext="${board.board_title}"></a></pre>
+				<a th:href="@{'/boardForm2/'+${board.board_num}}">답글달기</a>
+			</td>
+			<td th:text="${board.board_userid}"></td>
+			<td th:text="${board.board_date}"> </td>
+			<td th:text="${board.board_cnt}"></td>
+
+		</tr>
+	</table>
+	<div id="pageCenter" style="display : inline-block"></div>
+		
+	<a th:href="@{/../boardForm}">글쓰기</a>
+	
+
+</body>
+<script th:inline="javascript">
+	/*<![CDATA[*/ 
+var pageSize = /*[[${listSize}]]*/;
+	/*]]>*/	
+
+console.log(pageSize);
+
+
+
+
+
+for(var i = 1; i<=pageSize; i++){
+	let pageList = document.createElement('a');
+	pageList.setAttribute("class" , "pageList");
+	pageList.setAttribute("id" , "pageList"+i);
+	pageList.setAttribute("href" , "../boardList/"+i);
+	
+	document.querySelector('#pageCenter').appendChild(pageList);
+	$('#pageList'+i).html(i);
+	
+	
+}  
+
+
+</script>
+</html>

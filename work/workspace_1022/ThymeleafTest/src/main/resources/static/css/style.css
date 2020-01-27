@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+h1 {
+    color:#0000FF;
+}
+ 
+h2 {
+    color: navy;
+}
+ 
+
+ dt{
+ 	color: blue;
+ 
+ }
+ 
+ dd{
+ 	color: green;
+ }
+ 
+ span{
+ 	color: gray;
+ 
+ }

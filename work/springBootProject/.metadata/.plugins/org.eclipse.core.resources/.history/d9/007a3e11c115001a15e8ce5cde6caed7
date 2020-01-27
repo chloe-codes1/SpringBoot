@@ -1,0 +1,56 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<script
+		src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=84431dd5-3d00-402c-8f27-83feafcd1ff8"></script>
+
+	<title>T-map API Test 02</title>
+</head>
+
+<body>
+
+	<div id="map_div"></div>
+
+	<script>
+		// 1. 지도 띄우기
+		map = new Tmap.Map({
+			div: 'map_div',
+			width: "100%",
+			height: "400px",
+		});																										// -> zoom 설정
+		map.setCenter(new Tmap.LonLat("126.7499746596188", "37.49980548622674").transform("EPSG:4326", "EPSG:3857"), 14);
+		routeLayer = new Tmap.Layer.Vector("route");
+		map.addLayer(routeLayer);
+
+		markerStartLayer = new Tmap.Layer.Markers("start");
+		markerEndLayer = new Tmap.Layer.Markers("end");
+		markerWaypointLayer = new Tmap.Layer.Markers("waypoint");
+
+		pointLayer = new Tmap.Layer.Vector("point");
+
+		// 2. 시작, 도착 심볼찍기
+		// 시작
+		map.addLayer(markerStartLayer);
+
+		var size = new Tmap.Size(24, 38);
+		var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
+		var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_r_m_s.png' />", size, offset);
+		var marker_s = new Tmap.Marker(new Tmap.LonLat("126.98605733268329", "37.568085523663385").transform("EPSG:4326", "EPSG:3857"), icon);
+		markerStartLayer.addMarker(marker_s);
+
+		// 도착
+		map.addLayer(markerEndLayer);
+
+		var size = new Tmap.Size(24, 38);
+		var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
+		var icon = new Tmap.IconHtml("<img src='http://tmapapis.sktelecom.com/upload/tmap/marker/pin_r_m_e.png' />", size, offset);
+		var marker_e = new Tmap.Marker(new Tmap.LonLat("127.00973587385866", "37.56445848334345").transform("EPSG:4326", "EPSG:3857"), icon);
+		markerEndLayer.addMarker(marker_e);
+
+	</script>
+
+</body>
+
+</html>

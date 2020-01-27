@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Board</title>
+</head>
+<body>
+
+<div id="title">
+
+<p id="title_text">Board</p> 
+
+</div>
+
+
+<div id="main">
+
+
+
+<div th:each="board: ${list}" id="board_list">
+
+
+ID : <span th:text="${board.id}"></span> <br/>
+Title : <span th:text="${board.title}"></span> <br/>
+Content : <span th:text="${board.content}"></span> <br/>
+
+Count : <span th:text="${boardStat.count}"></span> <br/>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

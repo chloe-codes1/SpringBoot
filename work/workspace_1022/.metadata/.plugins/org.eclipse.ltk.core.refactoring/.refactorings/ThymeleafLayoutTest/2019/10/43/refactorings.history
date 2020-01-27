@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;ThymeleafLayoutTest/src/main/resources/static/js/vender&apos; to &apos;vendㅐㄱ&apos;" description="Rename resource &apos;vender&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/static/js/vender" name="vendㅐㄱ" stamp="1571887799451" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;ThymeleafLayoutTest/src/main/resources/static/js/vendㅐㄱ&apos; to &apos;vendor&apos;" description="Rename resource &apos;vendㅐㄱ&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/static/js/vendㅐㄱ" name="vendor" stamp="1571887808553" updateReferences="true"/>
+</session>
