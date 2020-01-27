@@ -1,6 +1,0 @@
-INDEX VERSION 1.4+/home/chloe/Dropbox/bitcamp/SpringBoot/work/springBootProject/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-414424921.index
-3472127368.index
-3437472423.index
-2541934627.index
-4161061825.index
